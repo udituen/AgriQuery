@@ -1,5 +1,5 @@
 
-## ASKAGRI - RAG-LLM Powered 
+## AGRIQUERY - RAG-LLM Powered 
 
 ```
 askagri-rag-llm/
