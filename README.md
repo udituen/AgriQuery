@@ -1,8 +1,8 @@
 
-## AGRIQUERY - RAG-LLM Powered 
+## AGRIQUERY - RAG-LLM Powered Q&A App for Agricultural Researchers.
 
 ```
-askagri-rag-llm/
+agriquery-rag-llm/
 │
 ├── app/
 │   ├── rag_chain.py         # LangChain RAG setup
