@@ -1,0 +1,1 @@
+# Script to embed text chunks using OpenAI and store in FAISS
