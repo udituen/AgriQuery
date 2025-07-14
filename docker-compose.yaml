@@ -144,6 +144,13 @@ services:
       postgres:
         condition: service_healthy
 
+  rag-api:
+    build: ./app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./vectorstore:/app/vectorstore
+
   # streamlit:
   #   container_name: streamlit_app
   #   build:

@@ -5,6 +5,16 @@
 
 AgriQuery is an LLM-powered Q&A system built for agricultural researchers. It processes scientific publications and enables users to ask natural language questions, receiving context-aware answers backed by retrieved text. Built with LangChain, FAISS, Airflow, and Docker, it demonstrates a production-ready RAG architecture for domain-specific information retrieval.
 
+# End-to-End RAG with Airflow, FAISS, Llama, FastAPI
+
+## Usage
+1. `docker-compose up --build`
+2. Access:
+   - Airflow: http://localhost:8080
+   - FastAPI: http://localhost:8000/query?question=Your+question+here
+3. Run DAG `rag_pipeline` in Airflow UI to ingest & build FAISS.
+4. Query the running FastAPI endpoint.
+
 
 ```
 agriquery-rag-llm/
@@ -38,3 +48,12 @@ agriquery-rag-llm/
 
 
 ```
+pip install transformers langchain langchain_community sentence-transformers faiss-cpu
+
+## 🏁 Complete Local RAG Stack
+Component	       Tool
+Chunking	LangChain Splitters
+Embedding	Sentence Transformers
+Vector DB	FAISS
+LLM	        HuggingFace Llama (Locally)
+RAG Chain	LangChain RetrievalQA
