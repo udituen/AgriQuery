@@ -1,1 +1,0 @@
-# DAG for ingesting and embedding agricultural data
