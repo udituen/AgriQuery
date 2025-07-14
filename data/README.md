@@ -1,1 +1,1 @@
-sample agricultural PDFs here.
+agricultural PDFs here.
