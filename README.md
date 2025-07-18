@@ -1,14 +1,14 @@
 ---
-title: Streamlit Template Space
+title: Agriquery
 emoji: 🚀
 colorFrom: red
 colorTo: red
 sdk: docker
 app_port: 8501
 tags:
-  - streamlit
+- streamlit
 pinned: false
-short_description: Streamlit template space
+short_description: LLM-powered question-answering system using RAG
 ---
 
 # Welcome to Streamlit!
