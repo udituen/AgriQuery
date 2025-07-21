@@ -4,13 +4,13 @@ import pandas as pd
 import streamlit as st
 
 """
-### Under Development
+### <<Under Development>>
 
 """
 
 st.title("AgriQuery - Agricultural AI Assistant")
 
-query = st.text_input("Ask a question about crops, soil, weather, etc.")
+query = st.text_input("Greetings, I am AgriQuery. Ask a question about anythin related to agriculture (e.g crops, soil, weather, etc.).")
 
 # build my knowledge base and store in a vectore store - FAISS
 
