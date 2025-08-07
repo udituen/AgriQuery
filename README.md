@@ -1,7 +1,7 @@
 ---
 title: Agriquery
-emoji: 🚀
-colorFrom: red
+emoji: 🧠
+colorFrom: green
 colorTo: red
 sdk: docker
 app_port: 8501
