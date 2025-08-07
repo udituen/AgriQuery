@@ -1,3 +1,10 @@
 altair
 pandas
 streamlit
+fastapi
+uvicorn
+langchain
+transformers
+sentence-transformers
+gradio
+faiss-cpu

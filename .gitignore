@@ -1,0 +1,5 @@
+todo.txt
+/data
+/airflow
+/vectorstore
+.env
