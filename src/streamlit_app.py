@@ -8,9 +8,17 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.llms import Ollama
+import os
+
+
+# ----------------------
+os.makedirs("./cache", exist_ok=True)
+# Set Hugging Face cache directory to a writable location
+os.environ["TRANSFORMERS_CACHE"] = "./cache"
+os.environ["HF_HOME"] = "./cache"
+
 
 # Initialize embeddings & documents
-# ----------------------
 @st.cache_resource
 def load_retriever():
     # Load documents
@@ -23,14 +31,12 @@ def load_retriever():
     return retriever
 
 # Load a lightweight model via HuggingFace pipeline
-# ----------------------
 @st.cache_resource
 def load_llm():
     pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
     return HuggingFacePipeline(pipeline=pipe)
 
 # Setup RAG Chain
-# ----------------------
 @st.cache_resource
 def setup_qa():
     retriever = load_retriever()
@@ -40,7 +46,6 @@ def setup_qa():
 
 
 # Streamlit App UI
-# ----------------------
 st.title("AgriQuery: RAG Demo (Streamlit + HF)")
 
 query = st.text_input("Ask a question:")
