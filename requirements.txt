@@ -8,3 +8,4 @@ transformers
 sentence-transformers
 gradio
 faiss-cpu
+langchain-community
