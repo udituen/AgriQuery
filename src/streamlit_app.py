@@ -1,20 +1,24 @@
 import streamlit as st
-from langchain.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.llms import HuggingFacePipeline
 from transformers import pipeline
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_community.llms import Ollama
 
 # Initialize embeddings & documents
 # ----------------------
 @st.cache_resource
 def load_retriever():
     # Load documents
-    with open("data/docs.txt", "r") as f:
-        docs = f.read().split("\n")
-    
+    # with open("data/docs.txt", "r") as f:
+    #     docs = f.read().split("\n")
+    # Later load
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    db = FAISS.from_texts(docs, embeddings)
+    db = FAISS.load_local("/vectorstore", embeddings)
     retriever = db.as_retriever()
     return retriever
 
