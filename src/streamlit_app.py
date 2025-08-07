@@ -12,10 +12,10 @@ import os
 
 
 # ----------------------
-os.makedirs("./cache", exist_ok=True)
-# Set Hugging Face cache directory to a writable location
-os.environ["TRANSFORMERS_CACHE"] = "./cache"
-os.environ["HF_HOME"] = "./cache"
+HF_CACHE_PATH = "/home/user/app_cache"
+os.makedirs(HF_CACHE_PATH, exist_ok=True)
+os.environ["TRANSFORMERS_CACHE"] = HF_CACHE_PATH
+os.environ["HF_HOME"] = HF_CACHE_PATH
 
 
 # Initialize embeddings & documents
