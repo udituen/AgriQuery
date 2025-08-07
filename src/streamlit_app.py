@@ -18,7 +18,7 @@ def load_retriever():
     #     docs = f.read().split("\n")
     # Later load
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    db = FAISS.load_local("/vectorstore", embeddings)
+    db = FAISS.load_local("/vectorstore/agriquery_faiss_index", embeddings)
     retriever = db.as_retriever()
     return retriever
 
