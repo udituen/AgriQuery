@@ -1,6 +1,6 @@
 import streamlit as st
 from langchain.chains import RetrievalQA
-from langchain.llms import HuggingFacePipeline
+from langchain_community.llms import HuggingFacePipeline
 from transformers import pipeline
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -12,10 +12,10 @@ import os
 
 
 # ----------------------
-HF_CACHE_PATH = "./app_cache"
-# os.makedirs(HF_CACHE_PATH, exist_ok=True)
-os.environ["TRANSFORMERS_CACHE"] = HF_CACHE_PATH
-os.environ["HF_HOME"] = HF_CACHE_PATH
+# HF_CACHE_PATH = "./app_cache"
+# # os.makedirs(HF_CACHE_PATH, exist_ok=True)
+# os.environ["TRANSFORMERS_CACHE"] = HF_CACHE_PATH
+# os.environ["HF_HOME"] = HF_CACHE_PATH
 
 
 # Initialize embeddings & documents
@@ -46,9 +46,9 @@ def setup_qa():
 
 
 # Streamlit App UI
-st.title("AgriQuery: RAG Demo (Streamlit + HF)")
+st.title("AgriQuery: RAG-Based Q&A Assistant")
 
-query = st.text_input("Ask a question:")
+query = st.text_input("Ask a question related to agriculture:")
 
 if query:
     qa = setup_qa()

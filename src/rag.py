@@ -12,7 +12,6 @@ from pydantic import BaseModel
 from langchain.chains import create_retrieval_chain
 from dotenv import load_dotenv
 import os
-# define fastapi
 
 
 load_dotenv()
