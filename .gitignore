@@ -2,4 +2,4 @@ todo.txt
 /data
 /airflow
 .env
-/src/secrets.toml
+/src/.streamlit/secrets.toml

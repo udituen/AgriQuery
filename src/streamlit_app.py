@@ -11,10 +11,10 @@ from langchain_community.llms import Ollama
 import os
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from huggingface_hub import InferenceClient
 
 
-hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
+HF_TOKEN = os.environ.get("HF_TOKEN")
 
 # ----------------------
 system_prompt = (
@@ -47,7 +47,7 @@ def load_llm():
     # load the tokenizer and model on cpu/gpu
     model_name = "meta-llama/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto",use_auth_token=HF_TOKEN)
     pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
     return HuggingFacePipeline(pipeline=pipe)
 
