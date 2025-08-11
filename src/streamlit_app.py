@@ -18,6 +18,20 @@ import os
 # os.environ["HF_HOME"] = HF_CACHE_PATH
 
 
+system_prompt = (
+    "You are an agriultural research assistant."
+    "Use the given context to answer the question."
+    "If you don't know the answer, say you don't know."
+    "Context: {context}"
+)
+
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_prompt),
+        ("human", "{input}"),
+    ]
+)
+
 # Initialize embeddings & documents
 @st.cache_resource
 def load_retriever():
@@ -39,10 +53,14 @@ def load_llm():
 # Setup RAG Chain
 @st.cache_resource
 def setup_qa():
+
     retriever = load_retriever()
     llm = load_llm()
-    qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
-    return qa_chain
+    question_answer_chain = create_stuff_documents_chain(llm,prompt)
+    chain = create_retrieval_chain(retriever, question_answer_chain)
+
+    # qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+    return chain
 
 
 # Streamlit App UI
@@ -53,5 +71,5 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa.run(query)
-    st.success(result)
+        result = qa.invoke({"input": query})
+    st.success(result['answer'])
