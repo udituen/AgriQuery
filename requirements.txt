@@ -9,3 +9,4 @@ sentence-transformers
 gradio
 faiss-cpu
 langchain-community
+torch

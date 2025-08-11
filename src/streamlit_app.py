@@ -15,7 +15,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 # ----------------------
 system_prompt = (
-    "You are an agriultural research assistant."
+    "You are an agricultural research assistant."
     "Use the given context to answer the question."
     "If you don't know the answer, say you don't know."
     "Context: {context}"
