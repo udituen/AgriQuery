@@ -9,15 +9,11 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.llms import Ollama
 import os
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 
 # ----------------------
-# HF_CACHE_PATH = "./app_cache"
-# # os.makedirs(HF_CACHE_PATH, exist_ok=True)
-# os.environ["TRANSFORMERS_CACHE"] = HF_CACHE_PATH
-# os.environ["HF_HOME"] = HF_CACHE_PATH
-
-
 system_prompt = (
     "You are an agriultural research assistant."
     "Use the given context to answer the question."
@@ -35,10 +31,6 @@ prompt = ChatPromptTemplate.from_messages(
 # Initialize embeddings & documents
 @st.cache_resource
 def load_retriever():
-    # Load documents
-    # with open("data/docs.txt", "r") as f:
-    #     docs = f.read().split("\n")
-    # Later load
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     db = FAISS.load_local("./vectorstore/agriquery_faiss_index", embeddings, allow_dangerous_deserialization=True)
     retriever = db.as_retriever()
@@ -47,7 +39,13 @@ def load_retriever():
 # Load a lightweight model via HuggingFace pipeline
 @st.cache_resource
 def load_llm():
-    pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
+    # pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
+    
+    # load the tokenizer and model on cpu/gpu
+    model_name = "meta-llama/Llama-2-7b-chat-hf"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
+    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
     return HuggingFacePipeline(pipeline=pipe)
 
 # Setup RAG Chain
