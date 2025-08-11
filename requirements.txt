@@ -10,3 +10,4 @@ gradio
 faiss-cpu
 langchain-community
 torch
+accelerate
