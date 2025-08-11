@@ -13,6 +13,9 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 
+hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
+
 # ----------------------
 system_prompt = (
     "You are an agricultural research assistant."
