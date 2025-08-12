@@ -72,3 +72,5 @@ if query:
     with st.spinner("Thinking..."):
         result = qa.invoke({"input": query})
     st.success(result["answer"])
+    st.success(result)
+
