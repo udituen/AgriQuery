@@ -1,6 +1,6 @@
 ---
 title: Agriquery
-emoji: 🧠
+emoji: 🦀
 colorFrom: green
 colorTo: red
 sdk: docker
