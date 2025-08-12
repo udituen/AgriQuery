@@ -18,17 +18,15 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 
 # ----------------------
 system_prompt = (
-    "You are an agricultural research assistant."
-    "Use the given context to answer the question."
-    "If you don't know the answer, say you don't know."
-    "Context: {context}"
+    
 )
 
-prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", system_prompt),
-        ("human", "{input}"),
-    ]
+prompt = ChatPromptTemplate.from_template(
+    "You are an agricultural research assistant. "
+    "Use the given context to answer the question. "
+    "If you don't know the answer, say you don't know.\n"
+    "Context: {context}\n"
+    "Question: {input}"
 )
 
 # Initialize embeddings & documents
