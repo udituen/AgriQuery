@@ -42,13 +42,13 @@ def load_retriever():
 # Load a lightweight model via HuggingFace pipeline
 @st.cache_resource
 def load_llm():
-    pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
+    # pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
     # load the tokenizer and model on cpu/gpu
 
     model_name = "meta-llama/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
-    # pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
+    pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
     return HuggingFacePipeline(pipeline=pipe)
 
 # Setup RAG Chain
