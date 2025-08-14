@@ -71,7 +71,7 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa.invoke({"input": query})
+        result = qa.invoke(query)
     st.success(result["answer"])
     st.success(result)
 
