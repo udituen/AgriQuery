@@ -4,7 +4,7 @@ from langchain_community.llms import HuggingFacePipeline
 from transformers import pipeline
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain.prompts import ChatPromptTemplate
+from langchain.prompts import PromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.llms import Ollama
@@ -21,7 +21,7 @@ system_prompt = (
     
 )
 
-prompt = ChatPromptTemplate.from_template(
+prompt = PromptTemplate.from_template(
     "You are an agricultural research assistant. "
     "Use the given context to answer the question. "
     "If you don't know the answer, say you don't know.\n"
