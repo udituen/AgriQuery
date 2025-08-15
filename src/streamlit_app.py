@@ -19,17 +19,24 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 # ----------------------
 
 
-qa_template = """Use the given context to answer the question.
-If you don't know the answer, just say that you don't know, don't try to make up an answer.
-Keep the answer as concise as possible.
+# qa_template = """Use the given context to answer the question.
+# If you don't know the answer, just say that you don't know, don't try to make up an answer.
+# Keep the answer as concise as possible.
 
-Context: {context}
+# Context: {context}
 
-Question: {question}
-Answer:
-"""
+# Question: {question}
+# Answer:
+# """
 
-prompt = PromptTemplate.from_template(qa_template)
+
+# prompt = PromptTemplate.from_template(qa_template)
+
+prompt = PromptTemplate(
+    input_variables=["context", "question"],
+    template="Use the following context to answer the question.\n\nContext:\n{context}\n\nQuestion: {question}\n\nAnswer concisely and do not repeat the question or context."
+)
+
 
 # Initialize embeddings & documents
 @st.cache_resource
@@ -73,7 +80,7 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa({"query":query})
+        result = qa.invoke({"query":query})
     st.success(result["result"])
     st.success(result)
 
