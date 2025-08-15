@@ -17,17 +17,19 @@ from huggingface_hub import InferenceClient
 HF_TOKEN = os.environ.get("HF_TOKEN")
 
 # ----------------------
-system_prompt = (
-    
-)
 
-prompt = PromptTemplate.from_template(
-    "You are an agricultural research assistant. "
-    "Use the given context to answer the question. "
-    "If you don't know the answer, say you don't know.\n"
-    "Context: {context}\n"
-    "Question: {question}"
-)
+
+qa_template = """Use the given context to answer the question.
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+Keep the answer as concise as possible.
+
+Context: {context}
+
+Question: {question}
+Answer:
+"""
+
+prompt = PromptTemplate.from_template(qa_template)
 
 # Initialize embeddings & documents
 @st.cache_resource
