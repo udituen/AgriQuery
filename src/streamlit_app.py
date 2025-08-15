@@ -26,7 +26,7 @@ prompt = ChatPromptTemplate.from_template(
     "Use the given context to answer the question. "
     "If you don't know the answer, say you don't know.\n"
     "Context: {context}\n"
-    "Question: {input}"
+    "Question: {question}"
 )
 
 # Initialize embeddings & documents
