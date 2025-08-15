@@ -72,6 +72,6 @@ if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
         result = qa({"query":query})
-    # st.success(result["answer"])
+    st.success(result["result"])
     st.success(result)
 
