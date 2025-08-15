@@ -34,7 +34,7 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 
 prompt = PromptTemplate(
     input_variables=["context", "question"],
-    template="Use the following context to answer the question.\n\nContext:\n{context}\n\nQuestion: {question}\n\nAnswer concisely and do not repeat the question or context."
+    template="Answer concisely and do not repeat the question or context. \n Use the following context to answer the question.\n\nContext:\n{context}\n\nQuestion: {question}\n."
 )
 
 
