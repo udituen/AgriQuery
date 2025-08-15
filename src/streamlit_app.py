@@ -59,7 +59,7 @@ def setup_qa():
     question_answer_chain = create_stuff_documents_chain(llm,prompt)
     # chain = create_retrieval_chain(retriever, question_answer_chain)
 
-    qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, chain_type="stuff")
+    qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, chain_type="stuff", return_source_documents=True,chain_type_kwargs={'prompt':prompt})
     return qa_chain
 
 
@@ -71,7 +71,7 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa.invoke(query)
-    st.success(result["answer"])
+        result = qa({"input":query})
+    # st.success(result["answer"])
     st.success(result)
 
