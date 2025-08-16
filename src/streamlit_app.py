@@ -37,7 +37,7 @@ prompt = PromptTemplate(
     template=(
         "You are a knowledgeable agricultural research assistant.\n"
         "Use the context to answer the question.\n"
-        "If you don't know, say \"I don't know\".\n\n"
+        # "If you don't know, say \"I don't know\".\n\n"
         "Return ONLY the answer between <answer> and </answer>.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
@@ -60,7 +60,8 @@ def load_llm():
     # pipe = pipeline("text-generation", model="google/flan-t5-small", max_new_tokens=256)
     # load the tokenizer and model on cpu/gpu
 
-    model_name = "meta-llama/Llama-2-7b-chat-hf"
+    model_name = "meta-llama/Meta-Llama-3-8B-Instruct"
+    # model_name = "meta-llama/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
     pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
