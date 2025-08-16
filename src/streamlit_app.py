@@ -81,7 +81,7 @@ def setup_qa():
 
 
 # Streamlit App UI
-st.title("🌾 AgriQuery: RAG-Based Research Assistant")
+st.title("🌾 AgriQuery: RAG-Based Agricultural Research Assistant")
 
 query = st.text_input("Ask a question related to agriculture:")
 
