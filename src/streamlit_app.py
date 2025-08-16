@@ -34,13 +34,14 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 
 prompt = PromptTemplate(
     input_variables=["context", "question"],
-        template=(
-        "You are a knowledgeable agricultural research assistant. Use the context below to answer the question.\n\n"
+    template=(
+        "You are a knowledgeable agricultural research assistant.\n"
+        "Use the context to answer the question.\n"
+        "If you don't know, say \"I don't know\".\n\n"
+        "Return ONLY the answer between <answer> and </answer>.\n\n"
         "Context:\n{context}\n\n"
-        "Question: {question}\n\n"
-        "Answer in a single concise paragraph, without repeating the question or context."
-        "Respond ONLY with the answer, nothing else."
-    ),
+        "Question: {question}\n\n<answer>"
+    )
     )
 
 
@@ -70,7 +71,7 @@ def load_llm():
 def setup_qa():
 
     retriever = load_retriever()
-    llm = load_llm()
+    llm = load_llm().bind(stop=["</answer>"])
     question_answer_chain = create_stuff_documents_chain(llm,prompt)
     # chain = create_retrieval_chain(retriever, question_answer_chain)
 
@@ -79,7 +80,7 @@ def setup_qa():
 
 
 # Streamlit App UI
-st.title("🌾 AgriQuery: RAG-Based Q&A Assistant")
+st.title("🌾 AgriQuery: RAG-Based Research Assistant")
 
 query = st.text_input("Ask a question related to agriculture:")
 
@@ -87,6 +88,9 @@ if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
         result = qa.invoke({"query":query})
-    st.success(result["result"])
-    st.success(result['source_documents'])
+        raw = result["result"]
+        answer = raw.split("<answer>", 1)[-1].split("</answer>", 1)[0].strip()
+
+    st.success(answer)
+    # st.success(result['source_documents'])
 
