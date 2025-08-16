@@ -41,7 +41,7 @@ prompt = PromptTemplate(
         "Return ONLY the answer between <answer> and </answer>.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
-        "Answer: <answer - put answer after this tag> "
+        # "Answer: <answer - put answer after this tag> "
     )
     )
 
