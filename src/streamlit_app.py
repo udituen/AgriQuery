@@ -89,8 +89,8 @@ if query:
     with st.spinner("Thinking..."):
         result = qa.invoke({"query":query})
         raw = result["result"]
-        answer = raw.split("<answer>", 1)[-1].split("</answer>", 1)[0].strip()
+        answer = raw.split("<answer>", 1)[-1]
 
     st.success(answer)
-    # st.success(result['source_documents'])
+    st.success(result)
 
