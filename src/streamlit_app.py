@@ -41,7 +41,7 @@ prompt = PromptTemplate(
         "Return ONLY the answer between <answer> and </answer>.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
-        "Answer: <put answer after this tag> "
+        "Answer: <answer - put answer after this tag> "
     )
     )
 
@@ -72,7 +72,7 @@ def load_llm():
 def setup_qa():
 
     retriever = load_retriever()
-    llm = load_llm()
+    llm = load_llm().bind(stop=["</answer>"])
     question_answer_chain = create_stuff_documents_chain(llm,prompt)
     # chain = create_retrieval_chain(retriever, question_answer_chain)
 
@@ -81,7 +81,7 @@ def setup_qa():
 
 
 # Streamlit App UI
-st.title("🌾 AgriQuery: RAG-Based Agricultural Research Assistant")
+st.title("🌾 AgriQuery: RAG-Based Research Assistant")
 
 query = st.text_input("Ask a question related to agriculture:")
 
@@ -90,7 +90,7 @@ if query:
     with st.spinner("Thinking..."):
         result = qa.invoke({"query":query})
         raw = result["result"]
-        answer = raw.split("<put answer after this tag>", 1)
+        answer = raw.split("<answer - put answer after this tag>", 1)
 
     st.success(answer[-1])
     st.success(answer)
