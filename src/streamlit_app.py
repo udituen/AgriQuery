@@ -34,8 +34,14 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 
 prompt = PromptTemplate(
     input_variables=["context", "question"],
-    template="Answer concisely and do not repeat the question or context. \n Use the following context to answer the question.\n\nContext:\n{context}\n\nQuestion: {question}\n."
-)
+        template=(
+        "You are a knowledgeable agricultural research assistant. Use the context below to answer the question.\n\n"
+        "Context:\n{context}\n\n"
+        "Question: {question}\n\n"
+        "Answer in a single concise paragraph, without repeating the question or context."
+        "Respond ONLY with the answer, nothing else."
+    ),
+    )
 
 
 # Initialize embeddings & documents
@@ -80,7 +86,7 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa.run({"query":query})
+        result = qa.invoke({"query":query})
     st.success(result["result"])
     st.success(result['source_documents'])
 
