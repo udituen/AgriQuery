@@ -92,5 +92,6 @@ if query:
         answer = raw.split("<answer>", 1)
 
     st.success(answer[-1])
+    st.success(answer)
     st.success(result)
 
