@@ -38,9 +38,10 @@ prompt = PromptTemplate(
         "You are a knowledgeable agricultural research assistant.\n"
         "Use the context to answer the question.\n"
         "If you don't know, say \"I don't know\".\n\n"
-        "Return ONLY the answer between <answer> and </answer>.\n\n"
+        # "Return ONLY the answer between <answer> and </answer>.\n\n"
         "Context:\n{context}\n\n"
-        "Question: {question}\n\n<answer>"
+        "Question: {question}\n\n"
+        "Answer: <put answer after this tag> "
     )
     )
 
@@ -71,7 +72,7 @@ def load_llm():
 def setup_qa():
 
     retriever = load_retriever()
-    llm = load_llm().bind(stop=["</answer>"])
+    llm = load_llm()
     question_answer_chain = create_stuff_documents_chain(llm,prompt)
     # chain = create_retrieval_chain(retriever, question_answer_chain)
 
@@ -89,7 +90,7 @@ if query:
     with st.spinner("Thinking..."):
         result = qa.invoke({"query":query})
         raw = result["result"]
-        answer = raw.split("<answer>", 1)
+        answer = raw.split("<put answer after this tag>", 1)
 
     st.success(answer[-1])
     st.success(answer)
