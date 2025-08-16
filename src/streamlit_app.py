@@ -80,7 +80,7 @@ query = st.text_input("Ask a question related to agriculture:")
 if query:
     qa = setup_qa()
     with st.spinner("Thinking..."):
-        result = qa.invoke({"query":query})
+        result = qa.run({"query":query})
     st.success(result["result"])
-    st.success(result)
+    st.success(result['source_documents'])
 
