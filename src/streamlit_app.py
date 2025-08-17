@@ -37,12 +37,14 @@ prompt = PromptTemplate(
     input_variables=["context", "question"],
     template=(
         "You are a knowledgeable agricultural research assistant.\n"
-        "Use the context to answer the question.\n"
-        # "If you don't know, say \"I don't know\".\n\n"
-        "Return ONLY the answer between an <answer> and </answer> tag, do not include the context and question.\n\n"
+        "Use the context below to answer the question concisely.\n"
+        "Respond ONLY with the final answer inside <answer> and </answer> tags.\n\n"
+        "Example:\n"
+        "Question: What is photosynthesis?\n"
+        "Answer: <answer>Photosynthesis is the process by which plants convert sunlight into energy using chlorophyll, water, and carbon dioxide.</answer>\n\n"
         "Context:\n{context}\n\n"
-        "Question: {question}\n\n"
-        # "Answer: <answer - put answer after this tag> "
+        "Question: {question}\n"
+        "Answer:"
     )
     )
 
