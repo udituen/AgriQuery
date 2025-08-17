@@ -106,5 +106,5 @@ if query:
     st.success(clean_answer)
     # st.success(answer[-1])
     # st.success(answer)
-    # st.success(result)
+    st.success(f"Source Document(s): {result['source_documets']}")
 
