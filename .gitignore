@@ -3,4 +3,4 @@ todo.txt
 /airflow
 .env
 /src/.streamlit/secrets.toml
-/vectorstore/
+/vectorstore
