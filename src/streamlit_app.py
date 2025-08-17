@@ -96,12 +96,12 @@ if query:
         raw = result["result"]
         raw_answer = result["result"]
 
-    # Extract text from href
-    match = re.search(r"<answer>(.*?)</answer>", raw_answer, re.DOTALL)
-    if match:
-        clean_answer = match.group(1)
+    matches = re.findall(r"<answer>(.*?)</answer>", raw_answer, re.DOTALL)
+
+    if matches:
+        clean_answer = matches[-1].strip()   # last <answer>...</answer> block
     else:
-        clean_answer = raw_answer
+        clean_answer = raw_answer.strip()    # fallback
 
     st.success(clean_answer)
     # st.success(answer[-1])
