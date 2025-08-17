@@ -1,4 +1,17 @@
-## AGRIQUERY - RAG-LLM Powered Q&A App for Agricultural Researchers.
+---
+title: Agriquery
+emoji: 🦀
+colorFrom: green
+colorTo: red
+sdk: docker
+app_port: 8501
+tags:
+- streamlit
+pinned: false
+short_description: LLM-powered question-answering system using RAG
+---
+
+### AGRIQUERY - RAG-LLM Powered Q&A App for Agricultural Researchers.
 
 AgriQuery is an LLM-powered Q&A system built for agricultural researchers. It processes scientific publications and enables users to ask natural language questions, receiving context-aware answers backed by retrieved text. Built with LangChain, FAISS, Airflow, and Docker, it demonstrates a production-ready RAG architecture for domain-specific information retrieval.
 
