@@ -12,6 +12,7 @@ import os
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 from huggingface_hub import InferenceClient
+import re
 
 
 HF_TOKEN = os.environ.get("HF_TOKEN")
@@ -92,8 +93,17 @@ if query:
         result = qa.invoke({"query":query})
         raw = result["result"]
         answer = raw.split("<answer - put answer after this tag>", 1)
+        raw_answer = result["result"]  # from your RAG pipeline
 
-    st.success(answer[-1])
-    st.success(answer)
-    st.success(result)
+    # Extract text from href
+    match = re.search(r'href="([^"]+)"', raw_answer)
+    if match:
+        clean_answer = match.group(1)
+    else:
+        clean_answer = raw_answer
+
+    st.success(clean_answer)
+    # st.success(answer[-1])
+    # st.success(answer)
+    # st.success(result)
 

@@ -7,6 +7,10 @@ sdk: docker
 app_port: 8501
 tags:
 - streamlit
+- RAG
+- Ollama
+- FAISS
+
 pinned: false
 short_description: LLM-powered question-answering system using RAG
 ---
