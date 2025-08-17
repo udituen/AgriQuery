@@ -38,7 +38,7 @@ prompt = PromptTemplate(
         "You are a knowledgeable agricultural research assistant.\n"
         "Use the context to answer the question.\n"
         # "If you don't know, say \"I don't know\".\n\n"
-        "Return ONLY the answer between <answer> and </answer>.\n\n"
+        "Return ONLY the answer between answer, do not include the context and question.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
         # "Answer: <answer - put answer after this tag> "
@@ -63,7 +63,7 @@ def load_llm():
     model_name = "meta-llama/Meta-Llama-3-8B-Instruct"
     # model_name = "meta-llama/Llama-2-7b-chat-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto", load_in_8bit=True)
     pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256)
     
     return HuggingFacePipeline(pipeline=pipe)
