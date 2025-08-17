@@ -11,3 +11,4 @@ faiss-cpu
 langchain-community
 torch
 accelerate
+bitsandbytes
