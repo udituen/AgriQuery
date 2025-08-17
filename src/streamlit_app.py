@@ -39,7 +39,7 @@ prompt = PromptTemplate(
         "You are a knowledgeable agricultural research assistant.\n"
         "Use the context to answer the question.\n"
         # "If you don't know, say \"I don't know\".\n\n"
-        "Return ONLY the answer between an answer tag, do not include the context and question.\n\n"
+        "Return ONLY the answer between an <answer> tag, do not include the context and question.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
         # "Answer: <answer - put answer after this tag> "
@@ -92,11 +92,10 @@ if query:
     with st.spinner("Thinking..."):
         result = qa.invoke({"query":query})
         raw = result["result"]
-        answer = raw.split("<answer - put answer after this tag>", 1)
-        raw_answer = result["result"]  # from your RAG pipeline
+        raw_answer = result["result"]
 
     # Extract text from href
-    match = re.search(r'href="([^"]+)"', raw_answer)
+    match = re.search(r"<answer>(.*?)</answer>", raw_answer, re.DOTALL)
     if match:
         clean_answer = match.group(1)
     else:
