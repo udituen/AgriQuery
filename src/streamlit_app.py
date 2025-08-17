@@ -39,7 +39,7 @@ prompt = PromptTemplate(
         "You are a knowledgeable agricultural research assistant.\n"
         "Use the context to answer the question.\n"
         # "If you don't know, say \"I don't know\".\n\n"
-        "Return ONLY the answer between an <answer> tag, do not include the context and question.\n\n"
+        "Return ONLY the answer between an <answer> and </answer> tag, do not include the context and question.\n\n"
         "Context:\n{context}\n\n"
         "Question: {question}\n\n"
         # "Answer: <answer - put answer after this tag> "
