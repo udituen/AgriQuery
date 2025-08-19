@@ -1,6 +1,6 @@
 todo.txt
-/data
-/airflow
+# /data
+# /airflow
 .env
 /src/.streamlit/secrets.toml
 # /vectorstore

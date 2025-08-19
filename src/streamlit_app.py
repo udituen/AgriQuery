@@ -104,7 +104,5 @@ if query:
         clean_answer = raw_answer.strip()    # fallback
 
     st.success(clean_answer)
-    # st.success(answer[-1])
-    # st.success(answer)
     st.success(f"Source Document(s): {result['source_documents']}")
 
