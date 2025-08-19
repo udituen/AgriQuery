@@ -1,5 +1,5 @@
 todo.txt
-# /data
+/data
 # /airflow
 .env
 /src/.streamlit/secrets.toml
