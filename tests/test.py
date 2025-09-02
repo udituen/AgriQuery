@@ -4,13 +4,16 @@ script to test the langchain retriever, and Llama generation model
 """
 
 import pytest
-from rag_app import answer_question
+from src.rag_pipeline import setup_qa
 
 
 # test for null entries
 def test_answer_non_empty():
     query = "What is agriculture?"
     response = answer_question(query)
+    qa = setup_qa()
+    result = qa.invoke({"query":query})
+
     assert isinstance(response, str)
     assert len(response) > 0
 
