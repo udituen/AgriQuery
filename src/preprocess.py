@@ -22,7 +22,7 @@ from langchain.docstore.document import Document
 
 
 FILE_PATH = "./data/"
-VECTORSTORE = "./vectorstore/agriquery_faiss_index"
+VECTORSTORE = "./vectorstore"
 
 # initialise the recursive method
 splitter = RecursiveCharacterTextSplitter(
