@@ -1,7 +1,6 @@
-
-from langchain.prompts import PromptTemplate
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import RetrievalQA
+from langchain_core.prompts import PromptTemplate
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from langchain_classic.chains import RetrievalQA
 import streamlit as st
 
 from src.generator import load_llm

@@ -13,10 +13,20 @@ sys.path.insert(0,parent_dir)
 
 from src.rag_pipeline import setup_qa
 
+EXAMPLE_QUESTIONS = [
+    "What is agriculture?",
+    "Why is crop rotation important?",
+    "How does composting help farming?",
+]
 
 HF_TOKEN = os.environ.get("HF_TOKEN")
 
 st.title("🌾 AgriQuery: RAG-Based Research Assistant")
+
+# Show example questions
+with st.expander("💡 Try example questions"):
+    for q in EXAMPLE_QUESTIONS:
+        st.markdown(f"- {q}")
 
 query = st.text_input("Ask a question related to agriculture:")
 
